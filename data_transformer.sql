@@ -136,6 +136,22 @@ ORDER BY
     o.OrderID;
 
 -- 4️⃣ FULL OUTER JOIN: Retrieve all customers and all orders, regardless of matching.
+-- This query is commented out as FULL OUTER JOIN may not be supported in many SQL databases.
+-- SELECT
+--     c.CustomerID,
+--     c.FirstName,
+--     c.LastName,
+--     o.OrderID,
+--     o.OrderDate,
+--     o.TotalAmount
+-- FROM
+--     Customers c
+--     FULL OUTER JOIN Orders o ON c.CustomerID = o.CustomerID
+-- ORDER BY
+--     c.CustomerID NULLS LAST,
+--     o.OrderID NULLS LAST;
+
+-- The above FULL OUTER JOIN can be simulated using UNION of LEFT and RIGHT JOINs:
 SELECT
     c.CustomerID,
     c.FirstName,
@@ -145,10 +161,21 @@ SELECT
     o.TotalAmount
 FROM
     Customers c
-    FULL OUTER JOIN Orders o ON c.CustomerID = o.CustomerID
+    LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
+UNION
+SELECT
+    c.CustomerID,
+    c.FirstName,
+    c.LastName,
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount
+FROM
+    Orders o
+    LEFT JOIN Customers c ON o.CustomerID = c.CustomerID
 ORDER BY
-    c.CustomerID NULLS LAST,
-    o.OrderID NULLS LAST;
+    COALESCE(c.CustomerID, 999999999),
+    COALESCE(o.OrderID, 999999999);
 
 -- 5️⃣ Subquery: Find customers who have placed orders worth more than the average amount.
 SELECT DISTINCT
