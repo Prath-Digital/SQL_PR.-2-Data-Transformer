@@ -126,4 +126,4 @@ FROM employees;
 
 ## 📎 File Download
 
-➡️ [Download `data_transformer.sql`](https://github.com/Prath-Digital/SQL_PR.-2-Data-Transformer/releases/download/SQL_PR_2_source_code/data_transformer.sql)
+➡️ [Download `data_transformer.sql`](https://github.com/Prath-Digital/SQL_PR.-2-Data-Transformer/releases/download/SQL_PR_2_source_code_latest/data_transformer.sql)
